@@ -1,0 +1,47 @@
+HƯỚNG DẪN KHI WINDOWS BÁO "VIRUS / TROJAN" KHI DÙNG BH TOOL
+============================================================
+
+BH TOOL KHÔNG PHẢI VIRUS. Tool bị Windows Defender và một số phần mềm
+diệt virus báo nhầm (false positive) vì 2 lý do kỹ thuật:
+
+  1. Tool được làm rối mã (obfuscation) để bảo vệ công sức của nhà phát
+     triển — phần mềm diệt virus thấy mã lạ là nghi ngờ ngay.
+  2. Tool cần ĐỌC/GHI BỘ NHỚ game (chức năng chỉnh HP, MP, hồi chiêu...)
+     — hành vi này giống công cụ hack nên bị đánh dấu "HackTool".
+
+File tool được kiểm tra đầy đủ trên VirusTotal trước khi phát hành.
+Nếu bạn lo ngại, có thể tự kiểm tra: tải file lên virustotal.com xem kết quả.
+
+
+CÁCH 1 — WINDOWS DEFENDER (mặc định của Windows) — làm theo 3 bước:
+------------------------------------------------------------------
+Bước 1. Mở "Windows Security" (Bảo mật Windows) → "Virus & threat
+        protection" (Bảo vệ khỏi virus & mối đe dọa)
+Bước 2. Kéo xuống "Virus & threat protection settings" (Cài đặt) →
+        "Exclusions" (Loại trừ) → "Add or remove exclusions" → bấm
+        "Add an exclusion" → chọn "Folder" (Thư mục)
+Bước 3. Chọn thư mục chứa BHTool (ví dụ D:\BHTool) → xong.
+
+  Tải lại file nếu Defender đã xóa: tắt ngoại lệ chưa xong thì Defender
+  có thể đã xóa file — thêm ngoại lệ TRƯỚC rồi mới tải/giải nén file.
+
+
+CÁCH 2 — CẢNH BÁO "Windows protected your PC" (SmartScreen):
+------------------------------------------------------------------
+Khi mở file lần đầu hiện màn hình xanh "Windows protected your PC":
+  → bấm "More info" (Thông tin khác) → bấm "Run anyway" (Vẫn chạy).
+
+
+CÁCH 3 — Nếu dùng phần mềm diệt virus khác (Avast, Kaspersky, 360...):
+------------------------------------------------------------------
+Vào phần Cài đặt → Exclusions / Ngoại lệ / Tin cậy (Trust) → thêm thư
+mục chứa BHTool. Mỗi phần mềm có tên mục khác nhau, tìm từ "exclusion"
+hoặc "trust".
+
+
+LƯU Ý QUAN TRỌNG:
+------------------------------------------------------------------
+- CHỈ tải BH Tool từ link do admin cung cấp. Đừng tải từ nguồn khác —
+  file giả mạo mới là thứ thực sự chứa virus.
+- Sau khi thêm ngoại lệ, nếu file bị xóa mất thì tải lại từ link admin.
+- Mọi thắc mắc gửi tin nhắn cho admin kèm ảnh chụp màn hình cảnh báo.
