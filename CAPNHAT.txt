@@ -1,0 +1,49 @@
+BH TOOL — GHI CHÚ BẢN MỚI
+=========================
+Bản tool: v161  (ngày 25/11/2025)
+File tool: bhtool.exe  (tool_ver = 161)
+
+------------------------------------------------------------------
+PHẦN THÊM MỚI TRONG v161 (so với v160)
+------------------------------------------------------------------
+1. TỰ ĐỘNG NHẬN + HOÀN THÀNH NHIỆM VỤ TÔNG MÔN
+   - Trước đây tool chỉ làm nhiệm vụ bảng treo thưởng ở trấn. v161 làm thêm
+     nhiệm vụ TÔNG MÔN: khi bạn mở "Nhà nhiệm vụ tông môn", tool tự nhận
+     nhiệm vụ và tự hoàn thành, tối đa số nhiệm vụ game cho phép.
+   - Nhận theo từng vòng (tối đa 12 vòng mỗi lần mở nhà), hết đơn thì dừng.
+   - Nhiệm vụ ẩn (isHide) cũng nhận được.
+
+2. NHẬN FULL — KHÔNG CÒN KHOÁ THỜI GIAN
+   - Trước: tool có "khoá" một số đơn (bỏ qua đơn vừa xong, hoặc đơn đã nhận
+     trong lần mở trước) -> bạn thấy thiếu đơn, ví dụ 114001/113001 hay
+     11201/11301.
+   - v161: BỎ HẾT các khoá đó. Mở bảng treo thưởng là nhận MỌI đơn đang có;
+     mở nhà nhiệm vụ tông môn là nhận liên tay cho đến khi hết đơn.
+   - Vẫn giữ 3 giới hạn an toàn:
+       + Không nhận đơn TRUY SÁT (loại 116/117) ở bảng treo thưởng.
+       + Không nhận nhiệm vụ TÔNG MÔN LOẠI 128 (loại này làm SẬP GAME).
+       + Không nhận lại đơn ĐANG NẰM TRONG SỔ (chống nhận trùng thật sự).
+
+3. SỬA LỖI LÀM SẬP GAME
+   - Nguyên nhân: nhiệm vụ tông môn loại 128 (Task128) làm game ném lỗi
+     "FormatException" trong Task128.TaskAdd lúc tạo nhiệm vụ -> sập vòng
+     Update -> game tắt. v161 chặn hoàn toàn loại này.
+   - Nhiệm vụ đã xong (state=1) trong sổ được dọn sạch sau 45s, kể cả đơn
+     của phiên trước (sau khi tool khởi động lại).
+
+4. KHÁC
+   - Tool tự gắn lại sau khi game khởi động lại / sập, không cần khởi động
+     lại tool.
+   - Log rõ hơn: "Bounty: NHẬN n đơn [...]", "Tông môn: nhận n nhiệm vụ [...]",
+     "bảng trấn này không có đơn nào (0 đơn)" — biết tool đã làm gì.
+
+------------------------------------------------------------------
+CÁCH CẬP NHẬT
+------------------------------------------------------------------
+  - Trong tool: bấm "Kiểm tra cập nhật" -> tool tự tải bhtool.exe mới và
+    khởi động lại.
+  - Hoặc tải thủ công: thay file bhtool.exe trong thư mục tool bằng file mới
+    (bhtool.exe trong repo này).
+
+Lưu ý: Windows Defender có thể báo nhầm virus (false positive) — xem file
+HUONGDAN_VIRUS.txt để biết cách thêm ngoại lệ.
