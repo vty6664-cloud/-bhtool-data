@@ -1,0 +1,6 @@
+v166 (27/11/2026): DON LAI TAB MOD
+- Bo chu "id 678000x" va "tu cap khi vao the gioi" o tung dong trong tab Mod (chi con ten tinh nang).
+- Link "Danh sach cuu nhan" chuyen tu trang Main sang tab Mod, nam o hang dau
+  "Xem cuu nhan tren map": re chuot vao hang moi hien, bam de mo danh sach nhu cu.
+- Trang Main khong con link nay (da bo).
+- Giu nguyen: tab Mod 5 tinh nang thay mod, o tick "Tu dong lam nhiem vu" o Main.
