@@ -1,0 +1,5 @@
+v162 (26/11/2026): SUA LOI LUU GAME
+- Tool khong tu tao dong conf 6780003/6780005/6780006 nua (day la nguyen nhan bam Luu bi bao "luu tru that bai", phai qua thang moi luu duoc; cung la cho lam game crash o ConfRoleCreateFeatureBase.AddItem).
+- Cac thien phu Pham Am van bat duoc bang dong GOC cung hieu ung (810104 / 811113 / 700048).
+- Neu dang bi chan luu: thoat han game, mo lai game (khong bat tool), bam Luu -> luu duoc, roi moi mo tool.
+- Ai muon ep tao dong nhu cu: dat file force_inject.txt canh BHTool.exe.
