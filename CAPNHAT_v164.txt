@@ -1,0 +1,6 @@
+v164 (27/11/2026): TRANG MAIN GON LAI
+- Bo hang chu "Truy tung cuu nhan + Cam ung (luon bat - khong tat duoc)" o trang Main.
+- Thay bang o tick "Tu dong lam nhiem vu": bat/tat viec nhan don treo thuong + nhiem vu tong mon
+  va tu hoan thanh. Tat o nay = tool khong dong vao nhiem vu nua (nhiem vu ban tu lam).
+- Link "Danh sach cuu nhan" gio luon hien o cuoi hang (truoc day phai re chuot moi thay).
+- Tab Vat pham (tu v163): bo cot ID / Cap / Gia cho gon, cot tu gian theo cua so.
