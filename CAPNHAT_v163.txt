@@ -1,0 +1,8 @@
+v163 (26/11/2026): THEM TAB VAT PHAM
+- Tab moi "Vat pham": xem toan bo 3302 vat pham cua game (ten tieng Viet), 16 nhom + 104 nhom con,
+  tim theo ten / ma so / ten nhom; tab tu nap khi mo, khong phai bam nut.
+- Them vat pham vao tui (chon so luong) va sua so luong vat pham dang co trong tui.
+- Tab "Ky nang": 994 muc (vo ky / linh ky / tuyet ky / than thong / than phap / tam phap) de tra ten + ma.
+- Du lieu doc THANG tu RAM game: phai vao the gioi roi moi mo tab, chua noi game thi tab bao ro
+  "chua ket noi game". Khong con file .tsv di kem, tool van chi 1 file exe.
+- Giu nguyen toan bo cua v162 (da sua loi khong luu duoc game).
