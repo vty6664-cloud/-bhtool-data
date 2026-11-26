@@ -1,0 +1,5 @@
+v167 (27/11/2026)
+- Tab Mod: "Tranh tran quai vat" gio bat/tat duoc that — bat thi khong bi quai danh up khi di duong.
+  Quai trong bi canh/dong phu van danh binh thuong.
+- Popup "Co gi moi": ghi chu ngan gon hon.
+- (Cac ban truoc: tab Vat pham, tab Mod, o "Tu dong lam nhiem vu".)
