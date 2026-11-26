@@ -1,0 +1,13 @@
+v165 (27/11/2026): TAB MOD — TINH NANG THAY MOD
+- Bo tab "Nghich thien cai menh" (tab trong, chua co gi) -> thay bang tab "Mod".
+- Tab Mod gom cac tinh nang truoc day phai cai mod ngoai:
+    Xem cuu nhan tren map          (id 6780003)
+    Tranh tran quai vat            (id 6780004)
+    An than khi giet NPC           (id 6780005)
+    Luan dao hien dap an           (id 6780006)
+    Mi luc +100 / Toc do +10%      (id 6780001)
+- Tick = tu cap khi vao the gioi; bo tick = khong cap nua (cai da cap trong save van con).
+- Mac dinh bat 2 muc nhu ban cu: Xem cuu nhan tren map + Luan dao hien dap an.
+- Nut "Bat ngay cac muc da tick" de cap lai ngay khi dang trong game.
+- Trang Main giu nguyen: toc do game, vo han HP/MP, hoi chieu, mo full map, hoc cong phap nhanh,
+  o tick "Tu dong lam nhiem vu" + link "Danh sach cuu nhan".
