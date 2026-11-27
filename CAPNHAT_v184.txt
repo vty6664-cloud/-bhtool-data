@@ -1,0 +1,9 @@
+v184 (27/11/2026) — SUA LOI MO TOOL
+- SUA LOI "Object reference not set to an instance of an object." hien ra ngay khi mo tool.
+  Nguyen nhan: tab Mod chi danh cho admin (can file beta.txt canh exe). May nguoi dung
+  thuong khong co tab do, nhung tool van co ve no -> vo ngay luc mo. Nay bo qua tab trong.
+  (Ban 183 bi loi nay, ai da cap nhat 183 thi cap nhat tiep 184.)
+- Them file bhcrash.txt: neu con loi khong bat duoc, tool ghi loi vao file nay canh exe
+  (gui file do cho admin la biet dap an).
+- Noi dung 183: tab Mod gon con 3 muc (Xem cuu nhan tren map / Tranh tran quai vat /
+  Luan dao hien dap an) — da bo "An than khi giet NPC" va "Mi luc +100 / Toc do +10%".
