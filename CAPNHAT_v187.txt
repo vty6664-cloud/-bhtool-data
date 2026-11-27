@@ -1,0 +1,11 @@
+v187 (28/11/2026)
+- TAB MAIN: o "Tu luyen cong phap nhanh" -> khi tick se hien 2 lua chon con:
+  * "Nhan exp moi lan luyen (x2)": moi lan game cong exp cong phap thi cong gap doi.
+    VAN bi chan dung tran cua bo do (khong the vuot tran nhu ban test cu).
+  * "Dat max dong ngay (mot lan)": day exp cac bo dang trang bi len dung tran
+    => mo het cac dong (tu 1..N tuy bo), khong can cho ngay. Giu dau tick 1,2s
+    va ghi ket qua ra o log.
+- Tat o cha / dong tool: code game tu tra ve nguyen ban (khong de lai patch).
+- Bo toan bo lenh test nguy hiem trong tool (martialtest/martialset/martialunlock/
+  setmax/rowmatch/maxexp/equip...) — tung gay crash.
+- Sua loi mo tool khong len (IndexOutOfRange khi khong co tham so).
