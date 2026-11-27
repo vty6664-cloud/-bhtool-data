@@ -1,0 +1,16 @@
+v183 (27/11/2026) — GOP 168..183
+- Tab Mod gon lai: bo muc "An than khi giet NPC" va "Mi luc +100 / Toc do +10%"
+  (an than thi ve sau game co Khi Linh Le Ngan Suong che; khong can tool).
+  Con 3 muc: Xem cuu nhan tren map, Tranh tran quai vat, Luan dao hien dap an.
+- SUA LOI LUU GAME (v181): tool KHONG BAO GIO tu tao dong conf 6780003/5/6 nua
+  -> het loi "bam Luu bi that bai, phai qua thang moi luu duoc".
+- SUA LOI KHOI DONG (v179): mo tool khong tham so bi thoat ngay (176-178).
+- Chay duoc khi co mod (v174): Truy tung / Luan dao dung dong conf goc cua game,
+  khong ghi conf nen khong xung dot mod.
+- Mo full map an toan (v177/180): goi ham goc cua game, khong tu tao Dictionary
+  -> ban do mo dung, khong con ban do den.
+- Autoquest (v170/171/173): chan goi ham khi game da tat, kiem tra the truoc khi
+  nhan, ghi 12 buoc cuoi ra bhlast.txt khi crash.
+- Tab Vat pham / Ky nang / Tam phap (v162-167): 3.302 vat pham, 846 ky nang,
+  148 tam phap — co ten Viet, tra ten + id, xem duoc ca khi chua mo game.
+- Tim kiem (v168): quet ca vat pham + ky nang, chuot phai/Ctrl+C de copy ten, ID.
