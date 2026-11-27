@@ -1,0 +1,17 @@
+v188 (28/11/2026)
+- TAB MAIN: gom lai thanh 2 nhom mo POPUP (keo di chuyen duoc, co nut X dong):
+  * "Tu luyen cong phap nhanh": Nhan exp moi lan luyen / Dat max dong ngay.
+  * "Linh hoi": Roll luon ra cap cao nhat / Roll luon cao hon dong dang co.
+- "Roll luon ra cap cao nhat": patch ham sinh cap cua game
+  (ConfBattleSkillPrefixValue.RandomPrefixLevel) -> moi lan Linh hoi ra cap 600,
+  game tu kep ve muc cao nhat ma loai cong phap do cho phep. Thay NGAY, khong
+  can luu/load save.
+- "Roll luon cao hon dong dang co": patch tai cho game ghi cap moi
+  (UnitActionMartialRealize..ctor): cap = max(roll cua game, cap cu + 40), chan 600.
+  Dong nao roll thap hon dong dang co se duoc nang, hien ngay tren bang Linh hoi.
+- Bo chu thich trong ngoac o cac o tick cho gon.
+- Sua loi: bo tick o cha khong goi handler cua o con (patch cu van con bat).
+- Dong tool / chon Thoat o tray: tu tra code game ve nguyen ban.
+- Them lenh phu (chi doc/ghi RAM, khong bat buoc dung):
+  --additem <id> <so luong>, --bag [tu khoa], --prefixset <id> <cap,...>,
+  --randlevel on|off|state, --realizeboost on|off|state, --martial guard <giay>, --hex <rva> <n>
