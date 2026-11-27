@@ -1,0 +1,8 @@
+v186 (27/11/2026) — BAN DUNG (sua lai sau khi lo up nham nhanh)
+- Tab Mod gon lai: bo "An than khi giet NPC" va "Mi luc +100 / Toc do +10%".
+  Con 3 muc: Xem cuu nhan tren map, Tranh tran quai vat, Luan dao hien dap an.
+- Ghi chu quan trong: ban 183/184 truoc do bi up nham tu mot nhanh source KHAC
+  (giao dien tab Mod kieu "Quan ly mod" / KHO MOD) — KHONG dung ban dang dung.
+  Ban 186 nay moi dung nhanh cua ban: tab Mod dang DANH SACH TICK, tab Vat pham
+  3.302 mon, o "Tu dong lam nhiem vu" o trang Main.
+  Ai da len 183/184 thi chi can mo tool -> tu cap nhat 186 la ve dung giao dien.
