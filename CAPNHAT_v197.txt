@@ -1,0 +1,20 @@
+BHTool v197 — sửa 2 lỗi của "Mở rộng kho đồ" (999 ô)
+
+1) Vào lại game thì mất 999 ô dù vẫn đang đeo nhẫn
+   - Nguyên nhân: capacity 947 của giới chỉ 8103551 chỉ được vá trong RAM.
+     Game tắt/mở lại là mất, mà tool lại không tự vá lại (chỉ vá lúc bấm ô).
+   - Đã sửa: khi đã vào thế giới và ô "Mở rộng kho đồ" đang bật, tool tự kiểm tra 3s/lần
+     và vá lại cả capacity lẫn vá tháo nhẫn. Ô bật/tắt được nhớ qua lần chạy sau
+     (file _modstate.txt cạnh BHTool.exe).
+   -> Khách chỉ cần: mở tool -> tick ô 1 lần. Sau đó tắt/mở game bao nhiêu lần cũng còn 999 ô.
+
+2) Không tháo được nhẫn: "Hành trang đạo cụ quá nhiều không thể tháo giới chỉ" (dù túi 70/92)
+   - Nguyên nhân: trước khi tháo, game tính (số ô kho - capacity của nhẫn) rồi so với số món.
+     Vì 947 ô nằm trong nhẫn nên hiệu = 52; túi có 70 món > 52 -> game chặn.
+     (Đây là logic gốc của game, nhưng mod làm nó lộ ra với mọi người.)
+   - Đã sửa: vá 2 chỗ kiểm tra (tháo nhẫn 0x3572F02, đổi nhẫn 0x35729D5) từ jge -> jmp:
+     luôn cho tháo/đổi giới chỉ.
+   - Lưu ý: tháo nhẫn xong kho về 52 ô. Món vượt quá 52 vẫn còn nguyên trong túi,
+     chỉ số ô hiển thị nhỏ hơn số món; đeo nhẫn lại là thấy đủ 999 ô.
+
+Lệnh kiểm tra: BHTool.exe --ringguard state | --ringbag state
