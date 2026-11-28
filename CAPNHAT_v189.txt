@@ -1,0 +1,11 @@
+v189 (28/11/2026)
+- TAB MOD: them o "Than mat nhanh (tang x5, giam /5, bo tran 60)" - thay mod ngoai.
+  * Nhan he so tang than mat (closeIncrease trong bang RoleClose) x5 va chia he so giam
+    (closeReduce) /5 => tro chuyen / tang qua / song tu len nhanh gap 5, mat cham 5 lan.
+  * BO TRAN 60: truoc day tro chuyen chi lap toi 60 (RoleChat.closeLimited = 60) nen qua
+    60 la "khong tang gi, chi tru tinh luc". Gio mo RoleChat.closeLimited va
+    RoleGive.closeOnceAddMax len 300, dong thoi bo clamp trong RelationData.AddIntim.
+  * Tat tick = tra goc ca 4 phan (bang RoleClose, code clamp, RoleChat, RoleGive).
+- Lenh phu de kiem tra / nang cao: --closespeed <n|off|state>, --close (doc bang),
+  --chatlimit <so|off>, --stepmax on|off, --intim [n], --intimwatch <giay>,
+  --intimadd <so> [unit] [clamp], --intimtest <n>, --mods, --beauty.
