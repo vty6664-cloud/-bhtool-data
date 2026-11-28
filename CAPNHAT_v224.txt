@@ -1,0 +1,26 @@
+v224 — "Ép chọn không hoạt động" là vì tool đang chạy bản CŨ
+
+Bằng chứng từ log của bạn (bhlog.txt)
+-------------------------------------
+  02:28:53 Ép chọn: ĐÃ KHÓA bảng nạp — bấm Roll trong game là ra đúng 9 khí vận này.
+
+Câu đó chỉ có ở bản v218. Và tiến trình đang chạy là:
+  BHTool_v218.exe   (D:\tool\bh_cur\BHTool_v218.exe)
+
+Vì sao nó không tự cập nhật: file tên BHTool_v218.exe là bản build thử của mình; tool chỉ
+tự thay file bhtool.exe nên bản này không bao giờ được cập nhật.
+Và bản v218 dùng hook InitData — mà game KHÔNG gọi hàm đó khi roll, nên ép chọn không có tác dụng.
+
+Cách dùng đúng
+--------------
+1. Tắt BHTool_v218 (kể cả icon ở khay hệ thống).
+2. Mở: D:\tool\bh_cur\bhtool.exe     (bản mới, v224)
+   Dòng đầu log sẽ ghi: BHTool v224 — bhtool.exe
+3. Vào màn tạo nhân vật, tick 3 khí vận, bấm Ép chọn.
+   Log sẽ ghi: "Ép chọn: đã khóa 3 khí vận — ..." và 9 ô trên màn hình đổi ngay.
+
+Đo thật trên game đang chạy (v224)
+----------------------------------
+  BHTool.exe --epchon 1714,1720,2002
+  pool: 1714,1720,2002,2003,2004,2424,1525,2202,2803
+  KHOP: True
