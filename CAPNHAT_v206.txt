@@ -1,0 +1,25 @@
+BHTool v206 — "Chế độ an toàn" KHÔNG chặn các tính năng thường dùng
+
+Trả lời ngắn: KHÔNG cần tắt ô "Chế độ an toàn" để dùng hầu hết tính năng.
+
+Không cần tắt (chỉ đọc/ghi bộ nhớ, chạy bình thường):
+  - Mở rộng kho đồ 999 ô (+ vá cho tháo/đổi giới chỉ)
+  - Đạo điểm tăng nhanh
+  - NPC mị lực cao
+  - Thân mật tăng nhanh
+  - Song tu x10 hảo cảm
+  - Học / tu luyện công pháp nhanh, Lĩnh hội
+  - Vô hạn sinh lực / linh lực, hồi chiêu, full map
+  - Tránh trận quái vật (patch code, không gọi hàm game)
+  - Xem/sửa chỉ số, vật phẩm
+
+Cần TẮT "Chế độ an toàn" (vì phải gọi hàm bên trong game qua hook RNG):
+  - Tự động làm nhiệm vụ (nhận đơn treo thưởng + tông môn, tự hoàn thành)
+  - Xem cừu nhân trên map, Luận đạo hiện đáp án (Phạm Âm)
+  - Nạp danh sách khí vận tự động ở tab Tiên Thiên
+
+v206 còn sửa cho rõ ràng: bật "Tự động làm nhiệm vụ" hoặc bấm "Bật ngay các mục đã tick"
+khi đang ở chế độ an toàn -> tool hiện dòng vàng "cần TẮT ô Chế độ an toàn" thay vì im lặng.
+
+Muốn an toàn tối đa mà vẫn dùng các tính năng trên: cứ để ô này BẬT, chỉ tắt khi chơi
+kiểu treo máy cày nhiệm vụ.
