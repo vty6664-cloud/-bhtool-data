@@ -1,0 +1,27 @@
+BHTool v203 — thêm "Chế độ an toàn (không gọi hàm game)" + vá lỗi 3 tính năng tự mất sau khi tải save
+
+Tình huống khách báo: bật tool, KHÔNG tick gì, chơi ~10 phút vẫn crash.
+
+Lý do: tool mặc định tự chạy 3 thứ CÓ GỌI HÀM TRONG GAME (qua hook RNG):
+  - Tự động làm nhiệm vụ (mặc định BẬT, chạy 1,2s/lần)
+  - Tự bật Phạm Âm: "Xem cừu nhân trên map" + "Luận đạo hiện đáp án" (mặc định BẬT)
+  - Nạp danh sách khí vận khi vào thế giới
+Đó là phần duy nhất của tool thực thi code trong game, và là chỗ dễ làm hỏng heap nhất.
+
+v203 thêm ô "Chế độ an toàn (không gọi hàm game)" ở tab Main:
+  - tắt hook RNG (gỡ khỏi code game), dừng luồng nhận đơn, không tự bật Phạm Âm,
+    không nạp danh sách khí vận
+  - tool chỉ đọc/ghi bộ nhớ: kho 999 ô, đạo điểm, mị lực, thân mật, công pháp... vẫn chạy
+  - nhớ trạng thái qua lần chạy sau
+
+CÁCH KIỂM TRA CRASH (quan trọng):
+  1. Bật "Chế độ an toàn", chơi 20 phút.
+     - Không crash  -> thủ phạm là hook RNG (Tự động làm nhiệm vụ / Phạm Âm). Mình sẽ làm lại
+       phần đó an toàn hơn.
+     - Vẫn crash   -> không phải tool gọi hàm game; cần xem lại mod ngoài (MelonLoader, Villain,
+       FontOverride) hoặc save.
+  2. Báo lại kết quả để mình đi tiếp.
+
+Kèm các bản trước (đã tóm tắt trong "Có gì mới" khi tool cập nhật): 199-202 sửa lỗi
+"khong thay bang RingBase", kho 999 hiện chậm, hook Clamp chặt hơn, 3 tính năng tự bật lại
+sau khi tải save.
