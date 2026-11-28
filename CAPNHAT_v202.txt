@@ -1,0 +1,24 @@
+BHTool v202 — 3 tính năng không còn "tự mất" sau khi tải save
+
+Đã kiểm trên game đang chạy (bật -> đọc lại bảng config -> tắt -> đọc lại):
+  Đạo điểm tăng nhanh : 6 -> 60 / victoryThink 50 -> 500 , tắt trả về 6 / 50   OK
+  NPC mị lực cao      : weight tổng 50.820 -> 66.530 , tắt trả về 50.820      OK
+  Thân mật tăng nhanh : inc 6.25..100 -> 31.25..500, closeLimited 60 -> 300,
+                        tắt trả về đúng                                       OK
+
+Lỗi tìm thấy: cả 3 đều sửa BẢNG CẤU HÌNH trong RAM. Mỗi lần bạn tải save / về menu,
+game nạp lại cấu hình từ đĩa -> mọi thay đổi mất sạch, tính năng "im lặng" không tác dụng
+dù ô vẫn tick. Khách dễ tưởng là tool hỏng.
+
+Đã sửa (v202):
+- Tool kiểm 2s/lần: nếu phát hiện cấu hình đã bị trả về gốc thì TỰ BẬT LẠI và ghi log vàng
+  "game nạp lại config — đã bật lại" (cho cả 3 tính năng).
+- Nhớ trạng thái 3 ô này qua lần chạy tool sau (chung file _modstate.txt với ô kho 999):
+  tick 1 lần là đủ.
+
+Kèm từ v201 (chống crash): hook Clamp của "Thân mật tăng nhanh" chỉ vá khi đúng 5 byte gốc
+của bản game hỗ trợ, trần thân mật hạ 1e9 -> 500; "NPC mị lực cao" không lấy số đã sửa
+làm số gốc nữa.
+
+Muốn khoanh vùng crash 10 phút: tắt ô "Tự động làm nhiệm vụ" 15 phút xem còn crash không
+(đó là phần duy nhất gọi hàm game liên tục), rồi bật lại để so.
