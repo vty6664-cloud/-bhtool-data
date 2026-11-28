@@ -1,0 +1,32 @@
+BAN v190 — 28/11/2026
+=====================
+
+1) TAB MOD: "Song tu ×10 hảo cảm" (mới)
+   - Nhân RoleTrains.closeAddMin / closeAddMax lên ×10 (10/20 -> 100/200) — đúng bảng mà mod
+     "song tu x10" ngoài kia sửa.
+   - Mở RoleChat.closeLimited 60 -> 300 (trần của chính lần song tu cũng lấy từ đây).
+   - Bỏ trần clamp trong AddIntim.
+   - Tắt tick = trả gốc cả 3 phần.
+   Lưu ý: game tự nhân thêm ~10% theo mốc RoleClose rồi chặn cứng ở 300, nên mỗi lần bạn thấy
+   +10…+20 (mặc định chỉ +1…+2). Trần 300 là giới hạn của game, không phá được.
+
+2) SỬA LỖI CẬP NHẬT "File tool sai dấu vết (sha)"
+   - Trước: tải 1 lần, nếu sha lệch là bỏ (thường do CDN GitHub còn bản cũ 3-5 phút, hoặc
+     antivirus sửa file) -> khách kẹt ở màn hình cập nhật.
+   - Nay: thử 3 vòng (GitHub API không cache -> raw có cache-buster), chỉ nhận khi SHA256 VÀ
+     kích thước khớp update.json; báo rõ 8 ký tự sha nhận được/ mong đợi.
+   - Thêm link "Tải tay bản mới (mở trình duyệt)" hiện ngay khi lỗi sha.
+
+3) LỆNH KIỂM/TIỆN ÍCH MỚI (cho việc nghiên cứu, không cần mở tool)
+   --songtu off|2..50|state      xem/bật hệ số song tu
+   --confget <bảng> <key>        đọc 1 dòng conf bất kỳ trong RAM
+   --nocap on|off|state          bỏ/trả trần clamp của AddIntim
+   --daolu <id|top|near|list>    ép 1 NPC thành đạo lữ (ghi cả 2 phía)
+   --near [bán kính]             NPC quanh bạn: id, tên, nam/nữ, số ô, thân mật, [đã kết hôn]
+   --find <tên>                  tìm NPC theo tên (không dấu cũng được)
+   --npcinfo <id>                quan hệ / cảm tình / hôn nhân / tính cách của 1 NPC
+   --feel <id> <số>              đặt cảm tình của NPC với bạn
+   --divorce <id>                gỡ hôn nhân 2 phía
+   --settrait <id> <a> <b> <c>   đổi tính cách NPC (để cùng tính cách -> song tu 4 tim)
+
+Version: ToolVer 190, AssemblyVersion 1.27.0.0, ver.dat = 190
