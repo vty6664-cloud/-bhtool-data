@@ -1,0 +1,27 @@
+v225 — SỬA CRASH (lỗi của mình) + bỏ cách ghi nguy hiểm
+
+Vì sao crash
+------------
+Các bản v221–v224 (và các lần mình test trên máy bạn) có GHI CON TRỎ conf vào object UI
+(UIBornLuckItem.InitData). Object UI quét được có thể là object đã chết của màn tạo nhân vật
+cũ => ghi con trỏ vào đó làm hỏng heap, bộ dọn rác của game đọc phải con trỏ rác => crash
+(đúng kiểu lỗi WER "RtlLookupFunctionEntry returned NULL" / GC). Đây là lỗi của mình.
+
+v225 bỏ hẳn cách đó
+-------------------
+- "Ép chọn" và 2 chế độ đỏ / đỏ+vàng kim chỉ ghi SỐ NGUYÊN (group + weight) trong bảng conf
+  — không tạo/ghi con trỏ, không đụng object UI, không watcher.
+- Sau khi ghi thì gọi OnInit của game (RVA 0x3CF68B0) để game tự rebuild danh sách khí vận
+  theo conf mới — đúng cách mod Tiên Thiên Như Ý làm.
+- Thêm cảnh báo đỏ nếu bạn đang chạy file build thử (BHTool_vXXX.exe): bản đó KHÔNG tự cập nhật.
+
+Bạn cần làm
+-----------
+1. Tắt hết tool đang chạy (BHTool_v224.exe / BHTool_v218.exe...).
+2. Mở game lại (phiên vừa crash là rác).
+3. Chạy: D:\tool\bh_cur\bhtool.exe   (v225)
+4. Vào màn tạo nhân vật, tick khí vận, bấm Ép chọn.
+
+Mình nói rõ: cách "chỉ ghi số nguyên + OnInit" là cách an toàn và đúng như mod thật, nhưng mình
+CHƯA kiểm chứng được kết quả roll trên game của bạn (game đang tắt sau crash). Khi bạn mở game,
+mình sẽ kiểm bằng cách chỉ ĐỌC bộ nhớ: BHTool.exe --epchon ... rồi xem 9 ô (không ghi gì vào UI).
