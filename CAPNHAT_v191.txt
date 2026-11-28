@@ -1,0 +1,25 @@
+BAN v191 — 28/11/2026
+=====================
+
+TAB MOD: "Kho 999 ô khi mang giới chỉ Thanh Ảnh Minh Quang" (mới)
+  - Chỉnh capacity của ĐÚNG cây giới chỉ id 8103551 (青影明光 / Thanh Ảnh Minh Quang)
+    từ 40 lên 935 trong bảng RingBase.
+  - Mang giới chỉ đó -> kho = 64 (gốc) + 935 = 999 ô.
+  - Giới chỉ khác (Thạch Trầm Giới, ...) KHÔNG bị ảnh hưởng; không mang gì -> vẫn 64 ô.
+  - Tắt tick = trả capacity gốc 40 (lưu trong _ringbag.orig cạnh exe).
+  - Chỉ sửa RAM: đóng game là hết, không đụng save.
+
+Vì sao làm được như vậy: bảng RingBase có cột capacity, game tự cộng capacity của giới chỉ
+đang mang vào số ô kho. Nên chỉ cần sửa 1 dòng conf của cây giới chỉ đó.
+
+Lệnh kiểm: --ringbag probe | --ringbag state | --ringbag 935 | --ringbag off
+  probe = in capacity hiện tại + gọi thẳng DataProps.GetGridMaxNum() để đọc số ô thật.
+
+Version: ToolVer 191, AssemblyVersion 1.28.0.0, ver.dat = 191
+
+GHI CHU TEN MUC (sua lai cho de hieu)
+  - "Thân mật tăng nhanh"            (truoc: "Thân mật nhanh (tăng ×5, giảm ÷5, bỏ trần 60)")
+  - "Song tu tăng nhiều hảo cảm"     (truoc: "Song tu ×10 hảo cảm")
+  - "Mở rộng kho đồ"                 (truoc: "Kho 999 ô khi mang giới chỉ ...")
+    Ro chuot vao dong nay se hien chu thich: phai ĐEO gioi chi Thanh Anh Quang Minh
+    (8103551) thi kho moi thanh 999 o; gioi chi khac hoac khong deo = 64 o.
