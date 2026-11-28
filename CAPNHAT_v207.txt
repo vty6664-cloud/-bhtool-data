@@ -1,0 +1,20 @@
+BHTool v207 — sửa roll Tiên Thiên: hết delay 1 lần + hết lệch tên
+
+1) DELAY 1 LẦN (roll xong phải đợi, kết quả hiện như của lần trước)
+   Nguyên nhân: stub hook (TimerMgr.FixedUpdate) XOÁ CỜ ngay TRƯỚC khi gọi hàm game.
+   CallNowX chỉ chờ "cờ về 0" nên nó quay về trước khi hàm game chạy xong -> đọc slot kết quả 0xB0
+   vẫn là kết quả CŨ (của lần gọi trước) => cảm giác bị delay và "ăn" sang khí vận khác.
+   Đã sửa: ngắt cờ SAU khi hàm game chạy xong và đã ghi kết quả (cả stub khí vận và stub Học công pháp).
+   Stub do bản ≤206 cài sẵn trong game cũng được gỡ và cài lại bản mới (không nuôi stub cũ nữa).
+
+2) TÊN / SẮP XẾP LỘN
+   Danh sách chọn khí vận lấy TÊN + MÀU từ file cache của một mod khác (luck_cache.txt),
+   trong khi pool/kết quả lại lấy tên thật trong game -> hai danh sách lệch nhau, nhìn như
+   "đặt nhầm tên, sắp xếp lộn".
+   Đã sửa:
+   - Tên: lấy từ LocalText của chính game (conf.name -> tiếng Việt); cache chỉ còn là fallback.
+   - Độ hiếm (grade): lấy level thật của item trong game (offset 0x20), không lấy màu từ cache.
+   => Danh sách chọn và kết quả/pool giờ dùng CÙNG một nguồn tên + cùng độ hiếm.
+
+Kiểm tra nhanh: BHTool.exe --stubcheck
+  -> phải thấy "thu tu ngat co: ... => SAU khi goi (dung, khong delay)".
