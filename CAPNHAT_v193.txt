@@ -1,0 +1,26 @@
+BAN v193 — 28/11/2026
+=====================
+
+TAB MOD: "NPC mị lực cao" (mới) — thay mod ngoài "Mị Lực NPC"
+  - Mod "Mị Lực NPC" chỉ chứa 1 file ModExcel/RoleDress.json: nó sửa bảng ngoại hình NPC.
+  - Bảng RoleDress = 1434 dòng, 14 loại bộ phận (yifu quần áo, yanjing mắt, toufaqian tóc trước,
+    zuiba miệng, lian mặt, bizi mũi, meimao lông mày, maozi mũ, houbei sau lưng, ...).
+    Mỗi dòng có: beauty (điểm nhan sắc), active, weight (xác suất xuất hiện), npcGrade.
+  - Khi bật, tool:
+      1. nắn weight theo beauty: weight = round(weight * (100 + beauty)/100), kẹp 1..100
+         -> bộ phận beauty cao ra nhiều, beauty âm gần như bị loại;
+      2. cộng 40 beauty cho mỗi bộ phận (tối đa 150).
+  - Tắt = trả gốc từng dòng (lưu trong _dress.orig cạnh exe).
+
+  ĐO THẬT (đọc lại bảng trong RAM):
+      gốc : beauty min -100 max 150, trung bình 44, tổng weight 50820
+      bật : beauty min  -60 max 150, trung bình 84, tổng weight 51985
+      tắt : về đúng 44 / -100..150 / 50820
+
+  LƯU Ý: bảng này chỉ dùng khi game SINH NPC MỚI (NPC tự tạo). NPC đã có trong save
+  không đổi ngoại hình, không đổi chỉ số.
+
+Lệnh kiểm: --dressboost on | --dressboost off | --dressboost state
+           --beauty RoleDress   (xem phân bố beauty/weight hiện tại)
+
+Version: ToolVer 193, AssemblyVersion 1.30.0.0, ver.dat = 193
