@@ -1,0 +1,13 @@
+v211 — ép chọn bám đúng 9 ô game đang hiện + sửa ngay (400ms)
+
+Trước: watcher so bằng bản quét heap, chỉ sửa khi lệch 2 lần liên tiếp (2 x 2.5s = 5s).
+Trong 5s đó bạn thấy khí vận khác bộ đã chọn -> "lệch rất nhiều".
+
+Nay:
+- So trực tiếp trên danh sách selectLuck (chính là 9 ô game vẽ ra màn hình).
+- Sửa ngay lần lệch đầu, kiểm lại mỗi 400ms.
+- Mỗi lần đồng bộ in 1 dòng log: UI(9): 2805 Âm Dương Nhãn; ...  để bạn đối chiếu với màn hình.
+
+Lệnh chẩn đoán (đứng ở màn Tạo nhân vật mới có selectLuck):
+  BHTool.exe --pool
+  -> in "--- selectLuck (9 o DANG HIEN)" + tên từng ô.
