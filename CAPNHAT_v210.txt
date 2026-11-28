@@ -1,0 +1,24 @@
+BHTool v210 — sửa CRASH do v209 (lỗi của mình)
+
+Nguyên nhân crash
+-----------------
+v209 thêm 1 lệnh vào stub hook (tăng số lần chạy) làm code stub dài 134 byte (0x86).
+Nhưng vùng "cờ + tham số" vẫn đặt ở 0x80 -> 6 byte cuối của code ĐÈ LÊN ô cờ.
+Hệ quả: tool ghi cờ vào giữa mã máy => nhảy vào rác => game crash (WER không xác định
+được module vì lỗi nằm trong vùng nhớ cấp phát động).
+
+Đã sửa (v210)
+-------------
+- Dời toàn bộ vùng cờ/tham số sang 0x100: cờ@0x100, tham số 0x108…0x148.
+- Thêm chốt an toàn: nếu code stub dài quá 240 byte thì KHÔNG cài (báo lỗi) thay vì crash.
+- Code stub hiện 134 byte, kết thúc trước 0x100.
+
+Bạn cần làm
+-----------
+1. Tắt hẳn game (process guigubahuang.exe) rồi mở lại — RAM của phiên vừa crash là rác.
+2. Mở BHTool (tự cập nhật v210), bấm "Kiểm tra hook" (hoặc chạy BHTool.exe --stubcheck).
+   Dòng cuối phải là: code stub: 134 byte (gioi han 240), slot @0x100
+                       thu tu ngat co: ... => SAU khi goi (dung, khong delay)
+3. Roll Tiên Thiên thử 2 lần.
+
+Ghi chú: save game không bị ảnh hưởng (crash xảy ra ở hook timer, không ghi vào save).
