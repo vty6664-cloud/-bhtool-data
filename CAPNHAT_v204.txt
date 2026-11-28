@@ -1,0 +1,29 @@
+BHTool v204 — TÌM RA LỖI GỐC GÂY CRASH (vá prologue TimerMgr.FixedUpdate) + chế độ an toàn mặc định BẬT
+
+Lỗi gốc (đo được, không phải phỏng đoán)
+---------------------------------------
+Tool hook hàm TimerMgr.FixedUpdate (RVA 0x2E3A0F0) và phải "chạy lại" 13 byte đầu:
+  40 53 | 48 83 EC 20 | 80 3D <disp32> <imm8>
+  push rbx | sub rsp,0x20 | cmp byte [rip+disp],0      <- kiểm tra cờ khởi tạo static (cctor)
+Địa chỉ nhảy (disp32) nằm ở byte thứ 8 của cụm đó, nhưng tool cũ đọc ở byte thứ 9
+-> lệch 1 byte -> sinh ra "cmp byte [0x2E7C89F],0" (byte 0x73 nằm giữa code il2cpp)
+thay vì "cmp byte [0x70B4343],0" (cờ cctor của TimerMgr).
+
+Hệ quả: sau lệnh cmp sai, game LUÔN nhảy qua phần gọi cctor => TimerMgr không được khởi tạo
+(static rỗng) nếu hook cài trước lần FixedUpdate đầu tiên => game hỏng dần và crash sau vài phút,
+ở nhiều module khác nhau (UnityPlayer / GameAssembly / mono) tuỳ chỗ đụng vào static đó.
+Đây khớp đúng triệu chứng "bật tool, không tick gì, ~10 phút crash".
+
+Đo trước/sau bằng BHTool.exe --stubcheck:
+  trước: cmp byte[...] +0x74 -> 2E7C89F  giá trị = 115  (sai)
+  sau  : cmp byte[...] +0x74 -> 70B4343  giá trị = 1    (đúng, cờ cctor thật)
+
+Đã sửa
+- Đọc disp đúng index 8 ở cả 3 hook cùng hàm (RollLuck, Học công pháp, CheckHide).
+- Kiểm tra byte đích phải là 0 hoặc 1; nếu không -> TỪ CHỐI cài hook (không để game hỏng).
+- Sửa tại chỗ stub cũ do bản ≤203 để lại trong game đang chạy (nuôi stub) -> phiên hiện tại cũng được vá.
+- "Chế độ an toàn (không gọi hàm game)" giờ mặc định BẬT: tool chỉ đọc/ghi bộ nhớ
+  (kho 999 ô, đạo điểm, mị lực, thân mật, công pháp...). Muốn Tự động làm nhiệm vụ / Phạm Âm
+  thì tắt ô cuối tab Main.
+
+Lệnh kiểm tra: BHTool.exe --stubcheck
