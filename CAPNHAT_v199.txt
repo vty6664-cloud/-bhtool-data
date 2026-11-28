@@ -1,0 +1,22 @@
+BHTool v199 — sửa lỗi "khong thay bang RingBase" giữa chừng
+
+Biểu hiện: đang chơi bình thường, một lúc sau log hiện
+"Kho 999 ô: chưa vá được (khong thay bang RingBase)" và mất 999 ô,
+dù game vẫn đang chạy (mở tool khác/CLI thì vẫn đọc được bảng RingBase).
+
+Nguyên nhân: tool giữ con trỏ tới đối tượng Game lấy từ lúc kết nối.
+Khi game tải save / về menu / nạp lại dữ liệu, game tạo ĐỐI TƯỢNG MỚI;
+con trỏ cũ thành rác nên mọi lệnh đọc bảng cấu hình (RingBase, RoleTrains…)
+đều thất bại — không riêng gì mở rộng kho đồ.
+
+Đã sửa:
+1. Tool kiểm tra 2s/lần xem đối tượng Game có bị thay không (đọc lại từ static
+   field + xác minh tên lớp), nếu có thì gắn lại ngay, log vàng
+   "Game tạo lại đối tượng (tải save / về menu) — đã gắn lại".
+2. Mọi lần tìm bảng cấu hình mà không thấy sẽ tự gắn lại rồi tìm lần nữa
+   (FindConfTable tự hồi phục) → không cần đóng/mở tool.
+
+Sau khi cập nhật: mở tool, ô "Mở rộng kho đồ" vẫn bật như lần trước; đeo giới chỉ
+8103551 là 999 ô, tháo/đổi nhẫn không bị chặn.
+
+Kiểm tra: BHTool.exe --ringbag state / --ringguard state
