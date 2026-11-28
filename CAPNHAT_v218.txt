@@ -1,0 +1,31 @@
+v218 — CÁCH MỚI: ÉP THẲNG KẾT QUẢ ROLL (đã kiểm bằng chính hàm roll của game)
+
+Vì sao các bản trước lệch
+-------------------------
+Tool cũ chỉ sửa group/weight trong bảng conf rồi hy vọng game roll theo ý mình — bản game này
+không đảm bảo điều đó, nên mỗi lần bạn bấm Roll là ra bộ khác.
+
+v218 làm gì
+-----------
+Hook hàm mà CHÍNH GAME gọi mỗi khi đặt 1 khí vận vào ô:
+
+  UIBornLuckItem.InitData(this = rcx, conf = rdx)   [RVA 0x2E9D220]
+  prologue: 40 53 | 48 83 EC 20 | 48 8B D9 | 48 89 51 40 ...
+
+Stub của tool thay rdx bằng conf của khí vận bạn chọn, theo chu kỳ 9 ô (bảng 9 conf trong stub),
+rồi chạy tiếp prologue gốc. Vì game gọi hàm này 9 lần mỗi lần roll, 9 ô luôn nhận đúng 9 khí vận
+đã chọn — cả phần hiển thị lẫn dữ liệu ghi vào nhân vật.
+
+Kiểm chứng trên game đang chạy (gọi thẳng hàm roll OnRandom của game)
+--------------------------------------------------------------------
+  pool TRƯỚC: 1714,1720,2002,1428,2206,1104,2418,2202,2008
+  pool SAU  : 1719,2417,2002,2805,1523,1429,2418,2422,2008
+  KHỚP BỘ ĐÃ CHỌN: True
+
+Và kiểm riêng hook: gọi InitData với id 1523 -> ô nhận id 1719 (đúng bảng), chỉ số chạy 0->1.
+
+Khác biệt so với trước
+----------------------
+- Không còn chờ animation 15 giây, không watcher 400ms, không ghi đè màn hình, không quét heap.
+- Bấm "Ép chọn" là xong; sau đó bấm Roll trong game bao nhiêu lần cũng ra đúng bộ đó.
+- Tắt chế độ hoặc đóng tool: tự trả lại 6 byte gốc của InitData (game về như cũ).
