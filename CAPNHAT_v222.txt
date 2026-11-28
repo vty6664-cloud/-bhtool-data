@@ -1,0 +1,27 @@
+v222 — ép Tiên Thiên 3 cái đã chạy (kiểm chứng trên game)
+
+Nếu ô góc trái tool vẫn hiện v216/v218 thì tool CHƯA cập nhật:
+bản v216 đã bỏ phần ghi vào 9 ô nên "Ép chọn" không có tác dụng gì — đó chính là
+"ép tiên thiên 3 cái không hoạt động".
+
+Cách kiểm tra bản đang chạy
+--------------------------
+  BHTool.exe --ver
+  -> phải in: BHTool v222
+
+Ép 3 khí vận (đo thật trên game đang chạy)
+------------------------------------------
+  BHTool.exe --epchon 1719,2417,2005
+  ban chon: 1719,2417,2005   cacheRed=44
+  target  : 1719,2417,2005,1429,2416,2004,1427,1428,2008
+  ApplyPoolNow: OK
+  pool    : 1719,2417,2005,1429,2416,2004,1427,1428,2008
+  KHOP: True
+
+Nghĩa là: 3 khí vận bạn chọn luôn có mặt, 6 ô còn lại tự lấp bằng khí vận đỏ (lv6),
+và sau mỗi lần bấm Roll trong game tool ghi lại đúng bộ đó.
+
+Cập nhật bằng cách nào
+----------------------
+- Tắt HẲN tool (kể cả icon ở khay hệ thống góc phải) rồi mở lại -> tự tải v222.
+- Hoặc tải trực tiếp bhtool.exe trên CDN.
