@@ -1,0 +1,22 @@
+BAN v194 — 28/11/2026
+=====================
+
+"NPC mị lực cao" — LÀM MẠNH HƠN (bản 193 chỉnh còn quá nhẹ)
+
+  Bản 193 dùng công thức nhân nhẹ nên xác suất bộ phận "đẹp" chỉ tăng 41.9% -> 43.0% (gần như
+  không thấy khác). Bản 194 LỌC CỨNG theo beauty gốc của từng bộ phận:
+
+      beauty >= 60   -> weight 100   (luôn được chọn)
+      beauty 20..59  -> weight 15    (hiếm)
+      beauty < 20    -> weight  0    (không bao giờ)
+
+  và vẫn cộng +40 beauty cho mỗi bộ phận (tối đa 150).
+
+  TÍNH TỪ BẢNG THẬT (1434 dòng RoleDress):
+      Xác suất bộ phận được chọn có beauty >= 60:  41.9%  ->  87.8%
+      Beauty trung bình của 1 bộ phận:             43.7   ->  76.7
+
+  NPC mới (và nhân vật bạn tạo mới) gần như chắc chắn ghép từ các bộ phận đẹp.
+  NPC đã có trong save KHÔNG đổi ngoại hình. Tắt = trả gốc từng dòng (_dress.orig).
+
+Version: ToolVer 194, AssemblyVersion 1.31.0.0, ver.dat = 194
