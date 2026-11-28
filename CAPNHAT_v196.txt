@@ -1,0 +1,29 @@
+BAN v196 — 28/11/2026
+=====================
+
+1) Ô "Đạo điểm tăng nhanh" CHUYỂN SANG TAB MAIN (dòng thứ 9)
+   - Cùng nhóm với Vô hạn HP/MP, Hồi chiêu, Mở full map... cho dễ thấy.
+
+2) ĐÃ KIỂM CHỨNG TRONG GAME (A/B 2 lần song tu)
+   - BẬT ô  : 道点 197 -> 213  = +16 / 1 lần song tu
+   - TẮT ô  : 道点 213 -> 214  = +1  / 1 lần song tu
+   - RAM khi tắt: getAbilityPointMin = 1, Max = 6 (đúng gốc)
+
+3) Nội dung nhân ×10 khi bật
+       Song tu   (RoleTrains):     getAbilityPoint 1..6  -> 10..60
+                                   victoryThink    40..50 -> 400..500
+       Luận đạo  (RoleDrill):      getAbilityPoint 1..6  -> 10..60
+                                   victoryThink    40..60 -> 400..600
+                                   failThink       15..30 -> 150..300
+       Khám phá  (RoleDiscovery):  getAbilityPoint 10..15 -> 100..150
+
+   Thanh 232/490 trong màn 心法 = 道点 còn trống / trần 490 (không phải "tâm đắc").
+
+   Tắt = trả gốc từng dòng (_RoleTrains_*.orig, _RoleDrill_*.orig, _RoleDiscovery_*.orig).
+
+Lệnh tay:
+    BHTool.exe --daopointboost on|off      bật/tắt cả cụm
+    BHTool.exe --daopoint ?                xem 道点 hiện tại
+    BHTool.exe --tamdac                    xem tiến trình tâm đắc
+
+Version: ToolVer 196, AssemblyVersion 1.33.0.0, ver.dat = 196
