@@ -1,0 +1,29 @@
+v221 — SỬA GỐC: tool ghi vào các ô ĐÃ CHẾT (nên ép chọn không ăn)
+
+Đo được gì
+----------
+1. Bản game này KHÔNG gọi UIBornLuckItem.InitData khi roll. Test: gắn hook đếm số lần gọi
+   rồi bấm roll của game => số lần = 0 (animation vẫn chạy 1 -> 0). Nên mọi cách "hook InitData"
+   hay "đổi group/weight" đều không thể ăn.
+2. ScanItemObjects() trả về 9 object nhưng lẫn object của màn tạo nhân vật CŨ (đã chết).
+   Ghi InitData vào object chết = không hiện gì (và có thể crash). Đây là lý do thật của
+   "ép chọn xong roll ra bộ khác".
+
+Cách làm mới (đã kiểm chứng)
+----------------------------
+1. Bấm roll 1 lần bằng chính hàm OnRandom của game.
+2. Trong 9 object, object nào ĐỔI khí vận = object SỐNG đang hiển thị (object chết giữ nguyên).
+3. Gọi InitData của game cho đúng 9 object sống đó với 9 khí vận bạn chọn.
+4. Kiểm chứng lại ngay: pool phải bằng đúng bộ đã chọn, không thì báo lỗi.
+5. Sau đó watcher 400ms chỉ đọc 9 ô: nếu bạn bấm Roll trong game, 9 ô đổi -> tool ghi lại
+   đúng bộ đã chọn. Không chờ animation 15s, không ghi bừa.
+
+Đo trên game đang chạy
+----------------------
+  trước: 2008,1719,2417,2002,2805,1523,1429,2418,2422
+  bấm roll của game -> 1104,2008,2419,2206,1720,1525,2417,2204,2804
+  SyncPool -> 1719,2417,2002,2805,1523,1429,2418,2422,2008
+  KHỚP: True
+
+Chế độ "ĐỎ + VÀNG KIM" giờ đúng ý bạn: 8 đỏ + 1 trong 3 vàng kim
+(2804 Phệ Hồn Kiếm / 2806 Linh Hoa Kiếm Ý / 2805 Âm Dương Nhãn — chọn ngẫu nhiên).
