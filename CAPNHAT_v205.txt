@@ -1,0 +1,41 @@
+BHTool v205 — gỡ hook RNG khi thoát tool + phân tích crash 29/11 01:02
+
+Về crash "không bật tool vẫn crash"
+-----------------------------------
+Crash lúc 01:02 rơi vào GameAssembly RVA 0x24A51A (và 0x24A529) — theo bảng .pdata là hàm
+0x24A4B0..0x24A66E. Disassembly cho thấy đây là vòng quét GC (Boehm):
+
+  mov rdi, [r12+rbp*8]      ; lấy 1 con trỏ object trong danh sách
+  test rdi, rdi
+  je ...
+  mov rax, [rdi]            ; <-- fault: đọc header object
+  test al, 1
+  and rax, ~1
+  movzx r15d, [rax+0x132]   ; <-- fault thứ hai (0x24A529)
+
+Tức là GC đọc một CON TRỎ OBJECT KHÔNG HỢP LỆ => heap managed đã bị hỏng (use-after-free hoặc
+con trỏ rác nằm trong một object). Stack trong Player.log cũng đúng kiểu này: ~50 frame lặp
+cặp 0x24A440 ↔ 0x24AA3A rồi mới tới UnityPlayer.
+
+Đã kiểm: mọi chỗ tool ghi vào object của game đều đúng offset theo dump.cs
+(beauty@0x60, weight@0x68 của ValueRoleDress; RoleTrains.value@0x20; RingBase.capacity@0x1C)
+— tool chỉ ghi int, không ghi con trỏ, nên không trực tiếp tạo ra con trỏ rác.
+
+Điểm quan trọng: hook RNG (patch code TimerMgr.FixedUpdate) TRƯỚC ĐÂY NẰM LẠI trong process game
+sau khi đóng tool. Bản ≤203 còn đọc sai cờ cctor (xem CAPNHAT_v204) — nếu hook cài sớm thì
+TimerMgr.static rỗng, GC/其他 code sẽ đụng static null => hỏng heap => crash kiểu này.
+Nên "không bật tool" vẫn crash nếu process game còn hook cũ từ phiên trước.
+
+v204 đã sửa gốc + vá lại stub cũ. v205 thêm:
+- Thoát tool -> tự gỡ hook RNG khỏi code game (roll.Remove()), không để lại patch nào.
+- "Chế độ an toàn" mặc định BẬT (từ 204) nên mặc định tool không cài hook.
+
+CÁCH XÁC NHẬN (quan trọng)
+1. Khởi động lại game (process mới = không còn hook cũ). Đóng hẳn tool. Chơi 20–30 phút.
+   - Không crash  -> nguyên nhân là hook cũ để lại; đã xử lý xong ở 204/205.
+   - Vẫn crash   -> không phải tool: thử rename thư mục Mods (MelonLoader: VillainX,
+     FontOverride, GGBH_MOD) rồi chơi lại cùng save. Nếu hết crash thì lỗi ở mod ngoài.
+2. Nếu cần bằng chứng tuyệt đối: bật LocalDumps (file .reg, cần admin) để lần crash sau có
+   minidump — mình sẽ đọc đúng địa chỉ + stack.
+
+Kiểm tra: BHTool.exe --stubcheck
