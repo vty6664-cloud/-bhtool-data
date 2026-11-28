@@ -1,0 +1,15 @@
+BHTool v200 — "Mở rộng kho đồ" hiện nhanh hơn nhiều
+
+Trước: tool chỉ kiểm/vá 1,5s một lần và chỉ sau khi đã vào thế giới (chờ player unit),
+nên khách thấy 999 ô hiện ra rất chậm ("vài giây sau mới có").
+
+Sau (v200):
+- Thêm vòng riêng 250ms chỉ để giữ vá giới chỉ 8103551 = 947 ô.
+- Không cần chờ vào thế giới: bảng conf RingBase có từ lúc game khởi động -> vá ngay
+  khi đang ải màn hình load, nên lúc mở túi đã sẵn 999 ô.
+- Nhớ địa chỉ item giới chỉ trong RAM -> mỗi lần kiểm chỉ đọc 4 byte (rất nhẹ,
+  không quét bảng, không đọc file), chỉ khi địa chỉ cũ chết mới quét lại.
+- Số gốc (40) cache trong RAM, không đọc file _ringbag.orig mỗi lần kiểm.
+
+Không cần làm gì thêm: tool tự cập nhật, ô đang bật vẫn bật.
+Kiểm tra: BHTool.exe --ringbag state / --ringguard state
