@@ -1,0 +1,28 @@
+BHTool v201 — rà soát 3 tính năng bị đồn là gây crash
+
+Đã kiểm trực tiếp trên game đang chạy (bật -> đọc lại bảng -> tắt -> đọc lại):
+
+1) Đạo điểm tăng nhanh — CHỈ sửa số trong bảng cấu hình, KHÔNG đụng code game
+   on : getAbilityPointMax 6 -> 60, victoryThinkMax 50 -> 500
+   off: 60 -> 6, 500 -> 50   (trả gốc đúng)
+
+2) NPC mị lực cao — chỉ sửa beauty/weight trong bảng RoleDress (1434 dòng)
+   on : beauty -60..150, tổng weight 66.530
+   off: beauty -100..150, tổng weight 50.820   (trả gốc đúng)
+   + Thêm chặn: nếu bảng đang ở trạng thái đã bật mà thiếu file gốc thì không lấy
+     số đã sửa làm "số gốc" nữa (trước đây tắt sẽ không trả lại được).
+
+3) Thân mật tăng nhanh — có 1 chỗ sửa code game (bỏ trần Clamp trong AddIntim)
+   on : closeIncrease 31.25..500, closeReduce 1.25..20, RoleChat.closeLimited 300
+   off: 6.25..100 / 6.25..100, closeLimited 60   (trả gốc đúng)
+   + Vá chặt hơn: chỉ hook khi 5 byte tại chỗ đó ĐÚNG là lệnh "call Clamp" của bản
+     game hỗ trợ; sai thì từ chối vá (trước đây vá bất kể — đây là rủi ro crash).
+   + Trần thân mật hạ từ 1e9 xuống 500: vẫn vượt 100 thoải mái, nhưng game không
+     phải tính với con số vô lý (float -> int) ở các hàm khác.
+
+Về chuyện "vào game 10 phút là crash": log Windows Error Reporting trên máy này cho
+thấy game crash rải rác từ 24/11 ở NHIỀU module khác nhau (UnityPlayer.dll,
+GameAssembly.dll, mono-2.0-bdwgc.dll, KERNELBASE.dll) — tức không phải do 1 tính năng
+cố định. Phần "đụng code game" nhiều nhất của tool là hook RNG dùng cho Tự động làm
+nhiệm vụ / Phạm Âm (tự bật khi vào thế giới). Muốn khoanh vùng: tắt Tự động làm nhiệm vụ
+15 phút, xem còn crash không; rồi bật lại để so.
