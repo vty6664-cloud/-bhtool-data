@@ -1,0 +1,14 @@
+BAN v192 — 28/11/2026
+=====================
+
+SUA: so o kho khi deo gioi chi Thanh Anh Minh Quang gio dung 999 (truoc la 987)
+  - Kho goc khi KHONG deo gioi chi = 52 o (khong phai 64).
+    64 la con so luc dang deo gioi chi nho "Thach Tram Gioi" (capacity 12): 52 + 12 = 64.
+  - Game cong capacity cua gioi chi dang deo vao kho goc, nen:
+        8103551 (Thanh Anh Minh Quang) capacity 947  ->  52 + 947 = 999 o
+        gioi chi khac (vd 220)                      ->  52 + 220 = 272 o
+        khong deo                                   ->  52 o
+  - Tool chi sua capacity cua dung cay 8103551; tat tick = tra 40 (goc).
+  - Sau khi doi capacity, phai THAO/DEO lai gioi chi (hoac mo lai tui) de game tinh lai so o.
+
+Version: ToolVer 192, AssemblyVersion 1.29.0.0, ver.dat = 192
