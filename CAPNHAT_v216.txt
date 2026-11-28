@@ -1,0 +1,27 @@
+v216 — TÌM RA LỖI "MỖI LẦN ÉP CHỌN TIÊN THIÊN LÀ LỖI"
+
+Đo trực tiếp trên game đang chạy (BHTool.exe --uiprop)
+------------------------------------------------------
+  uiProperty = 0x22e0d203500
+  +0x40      = 0x22dc8bb1f90     <- KHÔNG phải danh sách 9 ô khóa
+  SelectLuckValid = False (arr=0x22dc9e4d600 n=0)
+
+Quét toàn bộ uiProperty + UICreatePlayer tìm list nào mà phần tử trỏ tới conf khí vận:
+KHÔNG có list nào. Nghĩa là bản game này không giữ 9 ô ở uiProperty+0x40 như tool giả định.
+
+Vì thế mỗi lần bấm "Ép chọn" tool làm 3 việc vô nghĩa/hại:
+  1. WaitAnimIdle() đọc cờ animation ở +0x60 (sai chỗ) -> chờ đủ 15 GIÂY.
+  2. FixSelectLuck() -> không có list nên bỏ qua.
+  3. Bật watcher 400ms: thấy "UiMatches" luôn false (vì đọc list rỗng) -> gọi WritePool
+     liên tục: mỗi lần quét heap 2-4 giây + gọi InitData vào các object có thể đã chết.
+     => game giật, khí vận hiện ra loạn/lệch, và cứ ép chọn là gặp lỗi.
+
+v216 sửa
+--------
+- "Ép chọn" CHỈ ghi group + weight vào bảng conf (phần đã kiểm là đúng) rồi kết thúc.
+  Không chờ animation, không ghi pool, không watcher. Bấm là xong ngay.
+- Sau đó bạn bấm Roll trong game -> game roll theo group thật + weight 1e8 nên ra đúng bộ đã chọn.
+- FixSelectLuck / RepairRollState giờ bắt buộc XÁC THỰC (phần tử phải trỏ tới conf thật) trước khi
+  ghi; không xác thực được thì bỏ qua, tuyệt đối không ghi vào bộ nhớ rác.
+
+Lệnh chẩn đoán mới: --uiprop, --findlist, --find9, --groups, --plan id,id, --dups
