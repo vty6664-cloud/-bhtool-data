@@ -1,0 +1,34 @@
+BHTool v208 — sửa nốt lỗi roll Tiên Thiên (tool không nhận lại được stub của chính nó)
+
+Vì sao v207 vẫn lỗi
+--------------------
+v207 đổi layout stub hook (ngắt cờ SAU khi gọi hàm) nhưng phần "nhận diện stub cũ để nuôi tiếp"
+vẫn so theo các mốc offset cố định của layout CŨ (0x33/0x3A/0x4F). Kết quả:
+  - Mở lại tool (hoặc mở tool thứ hai) khi game đang chạy stub của v207
+  -> tool đọc ra "FixedUpdate đã bị hook khác chiếm" -> KHÔNG cài được hook
+  -> CallNowX không chạy -> mọi thao tác ép/roll đọc số cũ, roll ra loạn như "nhầm khí vận".
+
+Đã sửa (v208)
+-------------
+- Nhận diện stub của tool theo LATCH: lệnh `cmp byte [rip+d],0` phải trỏ đúng về stub+0x80.
+  Không phụ thuộc offset nữa -> nhận đúng stub của mọi bản tool.
+- Stub kiểu cũ (ngắt cờ trước khi gọi) thì tự trả prologue gốc và cài stub mới.
+- Stub kiểu mới thì dùng tiếp + tự sửa lại cờ cctor nếu lệch.
+
+Đã đo trên game đang chạy:
+  FixedUpdate @…  stub @…
+  cmp byte[...] +0x74 -> co cctor thật, giá trị = 1
+  thu tu ngat co: xoaCo@0x58 vs call@0x4f => SAU khi goi (dung, khong delay)
+
+Tên khí vận: đã kiểm bằng dữ liệu thật trong game
+  2805 -> "Âm Dương Nhãn" (lv6, group 50 = vàng kim)
+  1719 -> "Anh Hùng Truyền Thừa" (lv6)
+  2417 -> "Hậu Nghệ Xạ Nhật" (lv6)
+Tool giờ đọc đúng cột tiếng Việt của LocalText (cột 0x30), giống tên game hiển thị.
+
+Lệnh kiểm tra cho khách
+-----------------------
+  BHTool.exe --lucklist        danh sách khí vận + tên thật + level
+  BHTool.exe --pool            9 ô đang hiện trong màn tạo nhân vật
+  BHTool.exe --lucktext 2805   xem đủ 4 cột (Trung giản/Trung phồn/Việt/Hàn) của 1 id
+  BHTool.exe --stubcheck       kiểm hook + thứ tự ngắt cờ
