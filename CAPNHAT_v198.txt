@@ -1,0 +1,28 @@
+BHTool v198 — "Mở rộng kho đồ": bật 1 lần, các lần sau tự có
+
+Vấn đề khách báo: restart game rồi mở tool, log hiện "khong thay bang RingBase"
+và mất 999 ô luôn.
+
+Nguyên nhân
+- Game vừa khởi động thì bảng cấu hình RingBase chưa nạp xong. Tool cũ báo lỗi
+  rồi TỰ BỎ TICK ô -> mất luôn tính năng cho tới khi khách tick lại.
+- Nếu file _ringbag.orig bị mất, tool cũ lấy chính số đang vá (947) làm "số gốc",
+  nên bấm tắt cũng không trả về 40 được.
+
+Đã sửa
+1. Không tự bỏ tick nữa. Ô vẫn bật, tool tự vá lại 1,5s/lần cho tới khi được
+   (chỉ báo lỗi 30s/lần cho khỏi rác log), vá xong hiện log xanh
+   "Kho 999 ô: đã vá lại (...)".
+2. Nhớ trạng thái ô qua file _modstate.txt cạnh BHTool.exe -> mở tool lần sau
+   ô vẫn bật như cũ.
+3. Thêm số gốc dự phòng (giới chỉ 8103551 = 40) khi thiếu _ringbag.orig, và
+   ghi bổ sung id vào file gốc thay vì ghi đè.
+
+Nghĩa là: khách tick ô "Mở rộng kho đồ" đúng 1 lần. Sau đó tắt/mở game bao nhiêu
+lần, miễn tool đang chạy (kể cả thu nhỏ xuống taskbar) là đeo nhẫn 8103551 sẽ có
+999 ô, và tháo/đổi nhẫn không bị chặn.
+
+Lưu ý: 999 ô là capacity của giới chỉ trong bảng RingBase (config của game),
+KHÔNG nằm trong file save — nên vẫn cần tool chạy để vá vào RAM mỗi phiên.
+
+Kiểm tra: BHTool.exe --ringbag state  /  --ringguard state
