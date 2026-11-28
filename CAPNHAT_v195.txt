@@ -1,0 +1,28 @@
+BAN v195 — 28/11/2026
+=====================
+
+Tab Mod: thêm ô "Đạo điểm tăng nhanh"  (thay mod ngoài)
+
+  Thanh "Tâm đắc" trong màn 心法: mỗi lần đầy 490 thì +1 道点.
+  Trước đây song tu cho 40–50 tâm đắc, luận đạo 40–60  => ~10 lần mới được 1 điểm.
+
+  v195 nhân ×10 lượng tâm đắc và đạo điểm mỗi hành động:
+
+      Song tu   (RoleTrains):  victoryThink   40..50  ->  400..500
+                               getAbilityPoint 1..6   ->  10..60
+      Luận đạo  (RoleDrill):   victoryThink   40..60  ->  400..600
+                               failThink      15..30  ->  150..300
+                               getAbilityPoint 1..6   ->  10..60
+      Khám phá  (RoleDiscovery): getAbilityPoint 10..15 -> 100..150
+
+  => 1 lần song tu là đầy thanh 490  => +1 道点 ngay.
+
+  Tắt = trả gốc chính xác từng dòng (file _RoleTrains_*.orig, _RoleDrill_*.orig,
+  _RoleDiscovery_*.orig lưu ngay cạnh exe).
+
+  Lệnh tay:
+      BHTool.exe --daopointboost on|off     bật/tắt cả cụm
+      BHTool.exe --tamdac                   xem Tâm đắc hiện tại
+      BHTool.exe --settamdac <số>           đặt thẳng Tâm đắc
+
+Version: ToolVer 195, AssemblyVersion 1.32.0.0, ver.dat = 195
